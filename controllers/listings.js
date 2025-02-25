@@ -15,7 +15,7 @@ module.exports.index = async (req, res) => {
         req.flash("error", "No listings found for the specified country.");
     }
 
-    res.render("./listings/index.ejs", { allListings });
+    res.render("./listings/index.ejs", { allListings, error: req.flash('error') });
 };
 
 module.exports.renderNewForm = (req, res) => {
