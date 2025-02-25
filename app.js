@@ -25,7 +25,7 @@ app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine('ejs',ejsMate);
-app.use(express.static(path.join(__dirname,"/public")));
+app.use(express.static(path.join(__dirname,"public")));
 
 
 const dbUrl = process.env.ATLASDB_URL;
@@ -43,7 +43,7 @@ main().then(()=>{
 const store=MongoStore.create({
     mongoUrl:dbUrl,
     crypto:{
-        secret:"mysupersecretcode"
+        secret:process.env.SECRET
     },
     touchAfter:24*60*60,
 });
@@ -54,7 +54,7 @@ store.on("error",()=>{
 
 const sessionOptions={
     store,
-    secret:"mysupersecretcode",
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized: true,
     cookie:{
@@ -83,16 +83,6 @@ app.use((req,res,next)=>{
     res.locals.currUser=req.user;
     next();
 })
-
-
-// app.get("/demouser",async(req,res)=>{
-//     let fakeUser=new User({
-//         email:"student@gmail.com",
-//         username:"lohith011"
-//     });
-//     let registeredUser= await User.register(fakeUser,"helloworld");
-//     res.send(registeredUser);
-// })
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
