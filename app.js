@@ -12,6 +12,7 @@ const ExpressError=require("./utils/ExpressError");
 const listingRouter=require("./routes/listing");
 const reviewRouter =require("./routes/review");
 const session=require("express-session");
+const MongoStore=require("connect-mongo");
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require('passport-local');
@@ -27,9 +28,10 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
 
-const MONGO_URL="mongodb://127.0.0.1:27017/echoNest";
+const dbUrl = process.env.ATLASDB_URL;
+
 async function main() {
-     await mongoose.connect(MONGO_URL);
+     await mongoose.connect(dbUrl);
 }
 
 main().then(()=>{
@@ -38,16 +40,30 @@ main().then(()=>{
     console.log(err,"");
 })
 
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:"mysupersecretcode"
+    },
+    touchAfter:24*60*60,
+});
+
+store.on("error",()=>{
+  console.log("Error in MongoStore",err);  
+});
+
 const sessionOptions={
+    store,
     secret:"mysupersecretcode",
     resave:false,
     saveUninitialized: true,
     cookie:{
-        expire: Date.now() + 1000*60*60*24*7,
-        maxAge: 1000*60*60*24*7,
+        expire: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly:true,
-    }
+    },
 };
+
 
 
 app.use(session(sessionOptions));
