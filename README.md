@@ -80,15 +80,13 @@ CLOUD_API_SECRET=your_cloudinary_api_secret
 ATLASDB_URL=your_mongodb_atlas_url
 SECRET=your_session_secret
 ```
-## Contributions
-- **Contributions are welcome! Please follow these steps:**
+## 🤝 Contributing
+**Contributions are welcome! To contribute:**
 
-Fork the repository.
-Create a new branch (git checkout -b feature-branch).
-Make your changes.
-Commit your changes (git commit -m 'Add some feature').
-Push to the branch (git push origin feature-branch).
-Open a pull request.
+1. Fork the repository.
+2. Create a new branch for your feature.
+3. Commit and push your changes.
+4. Submit a pull request for review.
 
 
 ## Thank you for visiting EchoNest! If you have any questions or feedback, feel free to open an issue or contact us.
