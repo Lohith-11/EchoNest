@@ -1,6 +1,5 @@
 # EchoNest
 
-![EchoNest Logo](https://via.placeholder.com/150)
 
 Welcome to EchoNest, a comprehensive travel listing platform built with the MERN stack. This project allows users to explore, create, and manage travel listings, complete with reviews and ratings.
 
@@ -72,7 +71,7 @@ Welcome to EchoNest, a comprehensive travel listing platform built with the MERN
 
 ## Environment Variables
 
-Ensure you have the following environment variables set up in your [.env](http://_vscodecontentref_/32) file:
+- Ensure you have the following environment variables set up in your [.env](http://_vscodecontentref_/32) file:
 
 ```env
 CLOUD_NAME=your_cloudinary_cloud_name
@@ -80,8 +79,9 @@ CLOUD_API_KEY=your_cloudinary_api_key
 CLOUD_API_SECRET=your_cloudinary_api_secret
 ATLASDB_URL=your_mongodb_atlas_url
 SECRET=your_session_secret
-## Contributing
-Contributions are welcome! Please follow these steps:
+```
+## Contributions
+- **Contributions are welcome! Please follow these steps:**
 
 Fork the repository.
 Create a new branch (git checkout -b feature-branch).
@@ -91,9 +91,6 @@ Push to the branch (git push origin feature-branch).
 Open a pull request.
 
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Thank you for visiting EchoNest! If you have any questions or feedback, feel free to open an issue or contact us.
 
-Thank you for visiting EchoNest! If you have any questions or feedback, feel free to open an issue or contact us.
-
-Happy traveling! 🌍✈️🏖️
+## Happy traveling! 🌍✈️🏖️
