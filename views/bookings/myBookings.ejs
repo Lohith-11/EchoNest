@@ -1,0 +1,36 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-5">Your Bookings</h2>
+    <% if(listings.length > 0) { %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+      <% listings.forEach(listing => { %>
+      <div class="col">
+        <div class="card h-100 shadow-lg border-0">
+          <img src="<%= listing.image.url %>" class="card-img-top rounded-top" alt="<%= listing.title %>" style="height: 250px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title text-center mb-3"><%= listing.title %></h5>
+            <p class="card-text text-muted">
+              <strong>Location:</strong> <%= listing.location %>, <%= listing.country %><br />
+              <strong>Dates:</strong>
+              <% listing.bookings.forEach(booking => { %>
+                <% if(booking.user._id.equals(currUser._id)) { %>
+                  <%= booking.startDate.toDateString() %> to <%= booking.endDate.toDateString() %>
+                <% } %>
+              <% }) %>
+            </p>
+            <div class="mt-auto">
+              <a href="/listings/<%= listing._id %>" class="btn btn-primary w-100">View Listing</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <div class="text-center mt-5">
+      <p class="text-muted fs-5">No bookings found. Start exploring and book your next adventure!</p>
+    </div>
+    <% } %>
+  </div>
+</body>

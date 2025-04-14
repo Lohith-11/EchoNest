@@ -2,6 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Review=require("./review")
 
+const bookingSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    startDate: {
+        type: Date,
+        required: true,
+    },
+    endDate: {
+        type: Date,
+        required: true,
+    },
+});
+
 const listingSchema = new Schema({
     title: {
         type: String,
@@ -36,7 +52,8 @@ const listingSchema = new Schema({
     category:{
         type:String,
         enum:["mountains","trending","rooms","cities","castles","pools","camping","farms","arctic","domes","boats"]
-    }
+    },
+    bookings: [bookingSchema],
 });
 
 listingSchema.post("findOneAndDelete",async(listing)=>{

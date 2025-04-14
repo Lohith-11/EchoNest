@@ -59,3 +59,17 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   }
   next();
 };
+
+module.exports.hasBookedListing = async (req, res, next) => {
+  const { id } = req.params; // Listing ID
+  const listing = await Listing.findById(id).populate("bookings.user");
+  const hasBooked = listing.bookings.some(
+    (booking) => booking.user._id.equals(req.user._id)
+  );
+
+  if (!hasBooked) {
+    req.flash("error", "You can only review listings you have booked.");
+    return res.redirect(`/listings/${id}`);
+  }
+  next();
+};

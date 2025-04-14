@@ -108,3 +108,23 @@ body{
     padding-left: 0;
     padding-right: 0;
 }
+
+.custom-date-input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-date-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(50%);
+  cursor: pointer;
+}
