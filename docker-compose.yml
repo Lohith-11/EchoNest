@@ -1,29 +1,18 @@
-version: "3.8"
+version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - "8081:8080" # Change the host port to 8081
+      - "8082:8080" # Map host port 8082 to container port 8080
     environment:
-      NODE_ENV: production
-      CLOUD_NAME: ${CLOUD_NAME}
-      CLOUD_API_KEY: ${CLOUD_API_KEY}
-      CLOUD_API_SECRET: ${CLOUD_API_SECRET}
-      ATLASDB_URL: ${ATLASDB_URL}
-      SECRET: ${SECRET}
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:6
-    container_name: mongodb
-    ports:
-      - "27017:27017"
+      - ATLASDB_URL=${ATLASDB_URL}
+      - CLOUD_NAME=${CLOUD_NAME}
+      - CLOUD_API_KEY=${CLOUD_API_KEY}
+      - CLOUD_API_SECRET=${CLOUD_API_SECRET}
+      - SECRET=${SECRET}
     volumes:
-      - mongo_data:/data/db
-
-volumes:
-  mongo_data:
+      - .:/app
+      - /app/node_modules
+    # depends_on:
+    #   - some_other_service
