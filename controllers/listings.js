@@ -11,6 +11,8 @@ module.exports.index = async (req, res) => {
         allListings = await Listing.find({});
     }
 
+    console.log("Query Results:", allListings); // Add this line to debug
+
     if (allListings.length === 0) {
         req.flash("error", "No listings found for the specified country.");
     }
