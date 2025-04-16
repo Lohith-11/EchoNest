@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18'
-        }
-    }
+    agent any
 
     environment {
         DOCKER_IMAGE = "travelproject-app:latest"
@@ -17,12 +13,22 @@ pipeline {
         }
 
         stage('Install Dependencies') {
+            agent {
+                docker {
+                    image 'node:18'
+                }
+            }
             steps {
                 sh 'npm install'
             }
         }
 
         stage('Run Tests') {
+            agent {
+                docker {
+                    image 'node:18'
+                }
+            }
             steps {
                 sh 'npm test || echo "No tests defined"'
             }
@@ -48,4 +54,3 @@ pipeline {
         }
     }
 }
-
